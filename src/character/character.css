@@ -1,0 +1,59 @@
+.title {
+    font-weight: bold;
+}
+
+/* .spritesheet {
+    height: auto;
+    width: auto;
+    clip-path: rect(0px, 20px, 20px, 0px);
+} */
+
+.container {
+    width: 62px;
+    height: 63px;
+    border: 1px solid black;
+    left: 9px;
+    background: url(../assets/spritesheet.png);
+    /* animation: spellcastRight 1.5s steps(7) infinite; */
+}
+
+.spellcastLeft{
+    animation: spellcastLeft 1.5s steps(7) infinite;
+}
+
+.spellcastRight{
+    animation: spellcastRight 1.5s steps(7) infinite;
+}
+
+@keyframes spellcastBack {
+    0%{
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -448px 0;
+    }
+}
+@keyframes spellcastLeft {
+    0%{
+        background-position: 0px -64px;
+    }
+    100% {
+        background-position: -448px -64px;
+    }
+}
+@keyframes spellcastFront {
+    0%{
+        background-position: 0px -128px;
+    }
+    100% {
+        background-position: -448px -128px;
+    }
+}
+@keyframes spellcastRight {
+    0%{
+        background-position: 0px -192px;
+    }
+    100% {
+        background-position: -448px -192px;
+    }
+}
