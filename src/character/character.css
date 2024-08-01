@@ -17,43 +17,62 @@
     /* animation: spellcastRight 1.5s steps(7) infinite; */
 }
 
+:root {
+    --y-pos: 0;
+}
+
+/*/////////// WALK ///////////*/
+
+.walk{
+    animation: walk 1s steps(9) infinite;
+}
+
+.walkBack{
+    --y-pos: -512px;
+}
+.walkLeft{
+    --y-pos: -576px;
+}
+.walkFront{
+    --y-pos: -640px;
+}
+.walkRight{
+    --y-pos: -704px;
+}
+
+@keyframes walk {
+    0%{
+        background-position: 0 var(--y-pos);
+    }
+    100% {
+        background-position: -576px var(--y-pos);
+    }
+}
+
+/*/////////// SPELLCAST ///////////*/
+
+.spellcast{
+    animation: spellcast 1s steps(7) infinite;
+}
+
+.spellcastBack{
+    --y-pos: 0px;
+}
 .spellcastLeft{
-    animation: spellcastLeft 1.5s steps(7) infinite;
+    --y-pos: -64px;
 }
-
+.spellcastFront{
+    --y-pos: -128px;
+}
 .spellcastRight{
-    animation: spellcastRight 1.5s steps(7) infinite;
+    --y-pos: -192px;
 }
 
-@keyframes spellcastBack {
+@keyframes spellcast {
     0%{
-        background-position: 0 0;
+        background-position: 0 var(--y-pos);
     }
     100% {
-        background-position: -448px 0;
-    }
-}
-@keyframes spellcastLeft {
-    0%{
-        background-position: 0px -64px;
-    }
-    100% {
-        background-position: -448px -64px;
-    }
-}
-@keyframes spellcastFront {
-    0%{
-        background-position: 0px -128px;
-    }
-    100% {
-        background-position: -448px -128px;
-    }
-}
-@keyframes spellcastRight {
-    0%{
-        background-position: 0px -192px;
-    }
-    100% {
-        background-position: -448px -192px;
+        background-position: -448px var(--y-pos);
     }
 }
