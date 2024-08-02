@@ -11,10 +11,9 @@
 .container {
     width: 62px;
     height: 63px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     left: 9px;
     background: url(../assets/spritesheet.png);
-    /* animation: spellcastRight 1.5s steps(7) infinite; */
 }
 
 :root {
