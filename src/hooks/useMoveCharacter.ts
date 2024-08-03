@@ -1,6 +1,7 @@
 import { useEffect } from "react";
+import { movementProps } from "../character/types";
 
-export const useMoveCharachter = (setAnimation, animationName, movementRef, characterSpeed, setPosition) => {
+export const useMoveCharachter = ({setAnimation, animationName, movementRef, characterSpeed, setPosition} : movementProps ) => {
     useEffect(() => {
         const handleKeyDown = (event: { key: string; }) => {
           const key = event.key.toLowerCase();
