@@ -23,7 +23,7 @@
 /*/////////// WALK ///////////*/
 
 .walk{
-    animation: walk 1s steps(9) infinite;
+    animation: walk 0.6s steps(9) infinite;
 }
 
 .walkBack{
