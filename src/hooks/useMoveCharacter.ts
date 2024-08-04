@@ -1,21 +1,25 @@
 import { useEffect } from "react";
 import { movementProps } from "../character/types";
 
-export const useMoveCharachter = ({setAnimation, animationName, movementRef, characterSpeed, setPosition} : movementProps ) => {
+export const useMoveCharachter = ({setAnimation, animationName, movementRef, characterSpeed, setPosition, setDirection} : movementProps ) => {
     useEffect(() => {
         const handleKeyDown = (event: { key: string; }) => {
           const key = event.key.toLowerCase();
           if (key === 'a' || key === 'arrowleft') {
-            setAnimation(`${animationName} ${animationName}Left`)
+            setAnimation(`${animationName} ${animationName}Left`);
+            setDirection('Left');
             movementRef.current.left = -characterSpeed;
-          } else if (key === 'd' || key === 'arrowright') {
-            setAnimation(`${animationName} ${animationName}Right`)
+        } else if (key === 'd' || key === 'arrowright') {
+            setAnimation(`${animationName} ${animationName}Right`);
+            setDirection('Right');
             movementRef.current.left = characterSpeed;
-          } else if (key === 'w' || key === 'arrowup') {
-            setAnimation(`${animationName} ${animationName}Back`)
+        } else if (key === 'w' || key === 'arrowup') {
+            setAnimation(`${animationName} ${animationName}Back`);
+            setDirection('Back');
             movementRef.current.top = -characterSpeed;
-          } else if (key === 's' || key === 'arrowdown') {
-            setAnimation(`${animationName} ${animationName}Front`)
+        } else if (key === 's' || key === 'arrowdown') {
+            setAnimation(`${animationName} ${animationName}Front`);
+            setDirection('Front');
             movementRef.current.top = characterSpeed;
           }
         };
@@ -52,5 +56,24 @@ export const useMoveCharachter = ({setAnimation, animationName, movementRef, cha
           clearInterval(intervalId);
         };
     }, []);
+}
 
+export const useRanged = (setAnimation, animationName, direction) => {
+    useEffect(() => {
+        const handleClick = () => {
+            if(direction === 'Left') {
+                setAnimation(`${animationName} ${animationName}Left`)
+            } else if (direction === 'Right'){
+                setAnimation(`${animationName} ${animationName}Right`)
+            } else if (direction === 'Back'){
+                setAnimation(`${animationName} ${animationName}Left`)
+            } else if (direction === 'Front'){
+                setAnimation(`${animationName} ${animationName}Front`)
+            }
+        }
+        window.addEventListener('click', handleClick)
+        // return () => {
+        //     window.removeEventListener('click', handleClick)
+        // };
+    }, []);
 }

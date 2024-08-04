@@ -83,3 +83,31 @@
         background-position: -448px var(--y-pos);
     }
 }
+
+/*/////////// SHOOT ///////////*/
+
+.shoot{
+    animation: shoot 1s steps(13) 1;
+}
+
+.shootBack{
+    --y-pos: -1024px;
+}
+.shootLeft{
+    --y-pos: -1088px;
+}
+.shootFront{
+    --y-pos: -1152px;
+}
+.shootRight{
+    --y-pos: -1216px;
+}
+
+@keyframes shoot {
+    0%{
+        background-position: 0 var(--y-pos);
+    }
+    100% {
+        background-position: -832px var(--y-pos);
+    }
+}

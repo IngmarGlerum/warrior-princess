@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import sprites from '../assets/spritesheetBow.png'
 import  './character.css'
-import { useMoveCharachter } from '../hooks/useMoveCharacter';
+import { useMoveCharachter, useRanged } from '../hooks/useMoveCharacter';
 import { Position } from './types';
 
 const Character = () => {
@@ -11,14 +11,17 @@ const Character = () => {
   // const animationName2 = 'spellcast' 
   const characterSpeed = 4;
   const [position, setPosition] = useState({ top: 0, left: 0 });
+  const [direction, setDirection] = useState('Front');
   const movementRef = useRef<Position>({ top: 0, left: 0 });
   const weapon = 'recurveBow';
 
- 
-
-  const movement = {setAnimation, animationName, movementRef, characterSpeed, setPosition};
+  const movement = {setAnimation, animationName, movementRef, characterSpeed, setPosition, setDirection};
 
   useMoveCharachter(movement);
+  // console.log(direction);
+  
+  useRanged(setAnimation, 'shoot', direction);
+
   
   return (
     <>
