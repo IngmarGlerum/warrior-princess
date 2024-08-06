@@ -7,19 +7,19 @@ export const useMoveCharachter = ({setAnimation, animationName, movementRef, cha
           const key = event.key.toLowerCase();
           if (key === 'a' || key === 'arrowleft') {
             setAnimation(`${animationName} ${animationName}Left`);
-            setDirection('Left');
+            setDirection(0);
             movementRef.current.left = -characterSpeed;
         } else if (key === 'd' || key === 'arrowright') {
             setAnimation(`${animationName} ${animationName}Right`);
-            setDirection('Right');
+            setDirection(1);
             movementRef.current.left = characterSpeed;
         } else if (key === 'w' || key === 'arrowup') {
             setAnimation(`${animationName} ${animationName}Back`);
-            setDirection('Back');
+            setDirection(2);
             movementRef.current.top = -characterSpeed;
         } else if (key === 's' || key === 'arrowdown') {
             setAnimation(`${animationName} ${animationName}Front`);
-            setDirection('Front');
+            setDirection(3);
             movementRef.current.top = characterSpeed;
           }
         };
@@ -58,22 +58,25 @@ export const useMoveCharachter = ({setAnimation, animationName, movementRef, cha
     }, []);
 }
 
+// determine when shoot animation ends
+// make css class for showing only first frame (not an animation)
+
 export const useRanged = (setAnimation, animationName, direction) => {
     useEffect(() => {
         const handleClick = () => {
-            if(direction === 'Left') {
+            if(direction === 0) {
                 setAnimation(`${animationName} ${animationName}Left`)
-            } else if (direction === 'Right'){
+            } else if (direction === 1){
                 setAnimation(`${animationName} ${animationName}Right`)
-            } else if (direction === 'Back'){
-                setAnimation(`${animationName} ${animationName}Left`)
-            } else if (direction === 'Front'){
+            } else if (direction === 2){
+                setAnimation(`${animationName} ${animationName}Back`)
+            } else if (direction === 3){
                 setAnimation(`${animationName} ${animationName}Front`)
             }
         }
         window.addEventListener('click', handleClick)
-        // return () => {
-        //     window.removeEventListener('click', handleClick)
-        // };
-    }, []);
+        return () => {
+            window.removeEventListener('click', handleClick)
+        };
+    }, [direction]);
 }

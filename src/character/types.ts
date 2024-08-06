@@ -12,5 +12,5 @@ export interface movementProps {
       top: number;
       left: number;
     }>>;
-    setDirection: React.Dispatch<React.SetStateAction<string>>;
+    setDirection: React.Dispatch<React.SetStateAction<number>>;
 }

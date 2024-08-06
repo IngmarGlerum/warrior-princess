@@ -111,3 +111,16 @@
         background-position: -832px var(--y-pos);
     }
 }
+
+.bowIdle {
+    background-position: 0 -1024px;
+}
+.bowIdle {
+    background-position: 0 -1088px;
+}
+.bowIdle {
+    background-position: 0 -1152px;
+}
+.bowIdle {
+    background-position: 0 -1216px;
+}
