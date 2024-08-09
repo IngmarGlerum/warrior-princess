@@ -11,15 +11,15 @@ export const useAnimationEnd = () => {
         }
 
         const element = characterDivRef.current;
-        if (element) { // Check if the element is not null
+        if (element) { 
             element.addEventListener('animationend', handleAnimationEnd);
         }
         return () => {
-            if (element) { // Check if the element is not null
+            if (element) { 
                 element.removeEventListener('animationend', handleAnimationEnd);
             }
         };
-    }, [isAnimationEnded]);
+    }, []);
 
     return {characterDivRef, isAnimationEnded};
 }
