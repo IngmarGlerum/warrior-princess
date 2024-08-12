@@ -1,16 +1,21 @@
 import { useEffect, useRef } from "react";
-import { movementProps } from "../character/types";
+import { MovementProps } from "../character/types";
 
 export const useMoveCharachter = ({
+  isMoveKeyPressedRef,
   setAnimation,
   animationName,
   movementRef,
   characterSpeed,
   setPosition,
   setDirection,
-}: movementProps) => {
+}: MovementProps) => {
+  const animationFrameIdRef = useRef<number>(0); // To store the requestAnimationFrame ID
+
+  // Set up event listeners for key presses
   useEffect(() => {
-    const handleKeyDown = (event: { key: string }) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      isMoveKeyPressedRef.current = true;
       const key = event.key.toLowerCase();
       if (key === "a" || key === "arrowleft") {
         setAnimation(`${animationName} ${animationName}Left`);
@@ -31,20 +36,21 @@ export const useMoveCharachter = ({
       }
     };
 
-    const handleKeyUp = (event: { key: string }) => {
+    const handleKeyUp = (event: KeyboardEvent) => {
+      isMoveKeyPressedRef.current = false;
       const key = event.key.toLowerCase();
       if (
         key === "a" ||
         key === "d" ||
-        key === "arrowLeft" ||
-        key === "arrowRight"
+        key === "arrowleft" ||
+        key === "arrowright"
       ) {
         movementRef.current.left = 0;
       } else if (
         key === "w" ||
         key === "s" ||
-        key === "arrowUp" ||
-        key === "arrowDown"
+        key === "arrowup" ||
+        key === "arrowdown"
       ) {
         movementRef.current.top = 0;
       }
@@ -56,76 +62,49 @@ export const useMoveCharachter = ({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
+      if (animationFrameIdRef.current) {
+        cancelAnimationFrame(animationFrameIdRef.current);
+      }
     };
-  }, []);
+  }, [animationName, characterSpeed, setAnimation, setDirection]);
 
-  // console.log('above useEffect');a
-
-  const requestRef = useRef<number | undefined>(undefined);
-
+  // Animation loop
   useEffect(() => {
-    const moveCharacter = () => {
-      setPosition((prev) => ({
-        top: prev.top + (movementRef.current?.top || 0),
-        left: prev.left + (movementRef.current?.left || 0),
-      }));
-
-      console.log("inside useEffect");
-
-      // Request the next frame
-      requestRef.current = requestAnimationFrame(moveCharacter);
+    const updatePosition = () => {
+      if (isMoveKeyPressedRef.current) {
+        setPosition((prev) => ({
+          top: prev.top + (movementRef.current.top || 0),
+          left: prev.left + (movementRef.current.left || 0),
+        }));
+      }
+      animationFrameIdRef.current = requestAnimationFrame(updatePosition); // Schedule the next update
     };
 
-    // Start the animation loop
-    requestRef.current = requestAnimationFrame(moveCharacter);
+    updatePosition(); // Start the animation loop
 
     return () => {
-      if (requestRef.current !== undefined) {
-        cancelAnimationFrame(requestRef.current);
+      if (animationFrameIdRef.current) {
+        cancelAnimationFrame(animationFrameIdRef.current);
       }
     };
   }, []);
 };
 
-// export const useRanged = (animationName, direction) => {
-//   console.log('use move character');
-//   useEffect(() => {
-//     const handleClick = () => {
-//       if (direction === 0) {
-//         console.log(`${animationName} ${animationName}Left`);
-//       } else if (direction === 1) {
-//         console.log(`${animationName} ${animationName}Right`);
-//       } else if (direction === 2) {
-//         console.log(`${animationName} ${animationName}Back`);
-//       } else if (direction === 3) {
-//         console.log(`${animationName} ${animationName}Front`);
-//       }
-//     };
-
-//     window.addEventListener('click', handleClick);
-//     return () => {
-//       window.removeEventListener('click', handleClick);
-//     };
-//   }, [animationName, direction]); // Include dependencies to ensure effect re-runs on changes
-// };
-
 export const useRanged = (setAnimation, animationName, direction) => {
-  console.log("use move charecter");
-  useEffect(() => {
-    const handleClick = () => {
-      if (direction === 0) {
-        setAnimation(`${animationName} ${animationName}Left`);
-      } else if (direction === 1) {
-        setAnimation(`${animationName} ${animationName}Right`);
-      } else if (direction === 2) {
-        setAnimation(`${animationName} ${animationName}Back`);
-      } else if (direction === 3) {
-        setAnimation(`${animationName} ${animationName}Front`);
-      }
-    };
-    window.addEventListener("click", handleClick);
-    return () => {
-      window.removeEventListener("click", handleClick);
-    };
-  }, []);
+  const handleClick = () => {
+    console.log(direction);
+    if (direction === 0) {
+      setAnimation(`${animationName} ${animationName}Left`);
+    } else if (direction === 1) {
+      setAnimation(`${animationName} ${animationName}Right`);
+    } else if (direction === 2) {
+      setAnimation(`${animationName} ${animationName}Back`);
+    } else if (direction === 3) {
+      setAnimation(`${animationName} ${animationName}Front`);
+    }
+  };
+  window.addEventListener("click", handleClick);
+  return () => {
+    window.removeEventListener("click", handleClick);
+  };
 };

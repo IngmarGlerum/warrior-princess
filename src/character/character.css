@@ -1,5 +1,5 @@
 .title {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 /* .spritesheet {
@@ -9,118 +9,118 @@
 } */
 
 .container {
-    width: 62px;
-    height: 63px;
-    /* border: 1px solid black; */
-    left: 9px;
-    /* background: url(../assets/spritesheetSword.png); */
+  width: 62px;
+  height: 63px;
+  /* border: 1px solid black; */
+  left: 9px;
+  /* background: url(../assets/spritesheetSword.png); */
 }
 
 .longSword {
-    background: url(../assets/spritesheetSword.png);
+  background: url(../assets/spritesheetSword.png);
 }
 
 .recurveBow {
-    background: url(../assets/spritesheetBow.png);
+  background: url(../assets/spritesheetBow.png);
 }
 
 :root {
-    --y-pos: 0;
+  --y-pos: 0;
 }
 
 /*/////////// WALK ///////////*/
 
-.walk{
-    animation: walk 0.6s steps(9) infinite;
+.walk {
+  animation: walk 0.6s steps(9) infinite;
 }
 
-.walkBack{
-    --y-pos: -512px;
+.walkBack {
+  --y-pos: -512px;
 }
-.walkLeft{
-    --y-pos: -576px;
+.walkLeft {
+  --y-pos: -576px;
 }
-.walkFront{
-    --y-pos: -640px;
+.walkFront {
+  --y-pos: -640px;
 }
-.walkRight{
-    --y-pos: -704px;
+.walkRight {
+  --y-pos: -704px;
 }
 
 @keyframes walk {
-    0%{
-        background-position: 0 var(--y-pos);
-    }
-    100% {
-        background-position: -576px var(--y-pos);
-    }
+  0% {
+    background-position: 0 var(--y-pos);
+  }
+  100% {
+    background-position: -576px var(--y-pos);
+  }
 }
 
 /*/////////// SPELLCAST ///////////*/
 
-.spellcast{
-    animation: spellcast 1s steps(7) infinite;
+.spellcast {
+  animation: spellcast 1s steps(7) infinite;
 }
 
-.spellcastBack{
-    --y-pos: 0px;
+.spellcastBack {
+  --y-pos: 0px;
 }
-.spellcastLeft{
-    --y-pos: -64px;
+.spellcastLeft {
+  --y-pos: -64px;
 }
-.spellcastFront{
-    --y-pos: -128px;
+.spellcastFront {
+  --y-pos: -128px;
 }
-.spellcastRight{
-    --y-pos: -192px;
+.spellcastRight {
+  --y-pos: -192px;
 }
 
 @keyframes spellcast {
-    0%{
-        background-position: 0 var(--y-pos);
-    }
-    100% {
-        background-position: -448px var(--y-pos);
-    }
+  0% {
+    background-position: 0 var(--y-pos);
+  }
+  100% {
+    background-position: -448px var(--y-pos);
+  }
 }
 
 /*/////////// SHOOT ///////////*/
 
-.shoot{
-    animation: shoot 1s steps(13) 1;
+.shoot {
+  animation: shoot 1s steps(13) 1;
 }
 
-.shootBack{
-    --y-pos: -1024px;
+.shootBack {
+  --y-pos: -1024px;
 }
-.shootLeft{
-    --y-pos: -1088px;
+.shootLeft {
+  --y-pos: -1088px;
 }
-.shootFront{
-    --y-pos: -1152px;
+.shootFront {
+  --y-pos: -1152px;
 }
-.shootRight{
-    --y-pos: -1216px;
+.shootRight {
+  --y-pos: -1216px;
 }
 
 @keyframes shoot {
-    0%{
-        background-position: 0 var(--y-pos);
-    }
-    100% {
-        background-position: -832px var(--y-pos);
-    }
+  0% {
+    background-position: 0 var(--y-pos);
+  }
+  100% {
+    background-position: -832px var(--y-pos);
+  }
 }
 
-.bowIdle {
-    background-position: 0 -1024px;
+.bowIdleBack {
+  background-position: 0 -1024px;
 }
-.bowIdle {
-    background-position: 0 -1088px;
+.bowIdleLeft {
+  background-position: 0 -1088px;
 }
-.bowIdle {
-    background-position: 0 -1152px;
+.bowIdleFront {
+  background-position: 0 -1152px;
 }
-.bowIdle {
-    background-position: 0 -1216px;
+.bowIdleRight {
+  background-position: 0 -1216px;
 }

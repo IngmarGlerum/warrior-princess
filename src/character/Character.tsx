@@ -8,15 +8,19 @@ import { useAnimationEnd } from "../hooks/useAnimationEnd";
 const Character = () => {
   const [animation, setAnimation] = useState("spellcast spellcastLeft");
 
+  // TODO statevariables into 1 object
+
   const animationName = "walk";
   // const animationName2 = 'spellcast'
-  const characterSpeed = 4;
+  const characterSpeed = 6;
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const [direction, setDirection] = useState(0);
   const movementRef = useRef<Position>({ top: 0, left: 0 });
   const weapon = "recurveBow";
+  const isMoveKeyPressedRef = useRef<boolean>(false); // Track key state with ref
 
   const movement = {
+    isMoveKeyPressedRef,
     setAnimation,
     animationName,
     movementRef,
@@ -27,11 +31,11 @@ const Character = () => {
 
   useMoveCharachter(movement);
   // console.log(direction);
-  // console.log('rerender');
+  console.log("rerender");
 
   useRanged(setAnimation, "shoot", direction);
   const { characterDivRef, isAnimationEnded } = useAnimationEnd();
-  // console.log(isAnimationEnded);
+  console.log(isAnimationEnded);
   // console.log('character.tsx rerender');
 
   const idleArray = [
@@ -41,9 +45,17 @@ const Character = () => {
     "bowIdleFront",
   ];
 
+  console.log(isMoveKeyPressedRef.current);
+
   return (
     <>
-      <div className="title">Character</div>
+      <div className="title">
+        `container ${weapon} $
+        {isAnimationEnded && isMoveKeyPressedRef.current
+          ? idleArray[direction]
+          : animation}
+        ` direction: {direction} {isMoveKeyPressedRef.current}
+      </div>
       <button onClick={() => setAnimation("spellcast spellcastLeft")}>
         Left
       </button>
