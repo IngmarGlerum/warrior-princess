@@ -4,7 +4,7 @@ export interface Position {
 }
 
 export interface MovementProps {
-  setIsAnimationEnded: React.Dispatch<React.SetStateAction<boolean>>;
+  isAnimationDone: React.MutableRefObject<boolean>;
   isMoveKeyPressedRef: React.MutableRefObject<boolean>;
   setAnimation: React.Dispatch<React.SetStateAction<string>>;
   animationName: string;
