@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { MovementProps } from "../character/types";
 
 export const useMoveCharachter = ({
+  isAnimationDone,
   isMoveKeyPressedRef,
   setAnimation,
   animationName,
@@ -16,7 +17,9 @@ export const useMoveCharachter = ({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       isMoveKeyPressedRef.current = true;
+      isAnimationDone.current = false;
       const key = event.key.toLowerCase();
+
       if (key === "a" || key === "arrowleft") {
         setAnimation(`${animationName} ${animationName}Left`);
         setDirection(0);

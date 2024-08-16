@@ -18,8 +18,12 @@ const Character = () => {
   const movementRef = useRef<Position>({ top: 0, left: 0 });
   const weapon = "recurveBow";
   const isMoveKeyPressedRef = useRef<boolean>(false); // Track key state with ref
+  const isAnimationDone = useRef<boolean>(false);
+  const { characterDivRef, isAnimationEnded, setIsAnimationEnded } =
+    useAnimationEnd(isAnimationDone);
 
   const movement = {
+    isAnimationDone,
     isMoveKeyPressedRef,
     setAnimation,
     animationName,
@@ -34,7 +38,6 @@ const Character = () => {
   console.log("rerender");
 
   useRanged(setAnimation, "shoot", direction);
-  const { characterDivRef, isAnimationEnded } = useAnimationEnd();
   console.log(isAnimationEnded);
   // console.log('character.tsx rerender');
 
@@ -51,10 +54,11 @@ const Character = () => {
     <>
       <div className="title">
         `container ${weapon} $
-        {isAnimationEnded && isMoveKeyPressedRef.current
+        {isAnimationDone.current && !isMoveKeyPressedRef.current
           ? idleArray[direction]
           : animation}
-        ` direction: {direction} {isMoveKeyPressedRef.current}
+        ` direction: {direction} {isMoveKeyPressedRef.current} animation ended:{" "}
+        {JSON.stringify(isAnimationDone.current)}
       </div>
       <button onClick={() => setAnimation("spellcast spellcastLeft")}>
         Left
