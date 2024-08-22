@@ -1,14 +1,15 @@
-import Character from './character/Character'
+import Character from "./character/Character";
+import Projectile from "./projectile/Projectile";
 // import './App.css'
 
 function App() {
-
   return (
     <>
       <h1>hallo</h1>
-      <Character/>
+      <Projectile />
+      <Character />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

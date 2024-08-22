@@ -1,0 +1,14 @@
+/* .arrow {
+  height: 80px;
+} */
+
+.arrow {
+  width: 100px; /* Set the width of the div */
+  height: 100px; /* Set the height of the div */
+  background-image: url("../assets/arrowsketch.png");
+  background-size: 100px 100px;
+  background-position: -58px -35px; /* Position to show the desired portion */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+
+  transform: rotate(-6.5deg); /* Slightly tilt the image */
+}
