@@ -1,15 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 
-export const useAnimationEnd = (
-  isAnimationDone: React.MutableRefObject<boolean>
-) => {
+export const useAnimationEnd = () => {
   const characterDivRef = useRef<HTMLDivElement>(null);
   const [isAnimationEnded, setIsAnimationEnded] = useState(false);
 
   useEffect(() => {
     const handleAnimationEnd = () => {
-      console.log("animation ended");
-      isAnimationDone.current = true;
+      // isAnimationDone.current = true;
+      setIsAnimationEnded(true);
     };
 
     const element = characterDivRef.current;

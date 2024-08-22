@@ -2,7 +2,8 @@ import { useEffect, useRef } from "react";
 import { MovementProps } from "../character/types";
 
 export const useMoveCharachter = ({
-  isAnimationDone,
+  setIsAnimationEnded,
+  // isAnimationDone,
   isMoveKeyPressedRef,
   setAnimation,
   animationName,
@@ -17,7 +18,7 @@ export const useMoveCharachter = ({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       isMoveKeyPressedRef.current = true;
-      isAnimationDone.current = false;
+      setIsAnimationEnded(false);
       const key = event.key.toLowerCase();
 
       if (key === "a" || key === "arrowleft") {
@@ -94,20 +95,23 @@ export const useMoveCharachter = ({
 };
 
 export const useRanged = (setAnimation, animationName, direction) => {
-  const handleClick = () => {
-    console.log(direction);
-    if (direction === 0) {
-      setAnimation(`${animationName} ${animationName}Left`);
-    } else if (direction === 1) {
-      setAnimation(`${animationName} ${animationName}Right`);
-    } else if (direction === 2) {
-      setAnimation(`${animationName} ${animationName}Back`);
-    } else if (direction === 3) {
-      setAnimation(`${animationName} ${animationName}Front`);
-    }
-  };
-  window.addEventListener("click", handleClick);
-  return () => {
-    window.removeEventListener("click", handleClick);
-  };
+  useEffect(() => {
+    const handleClick = () => {
+      console.log(direction);
+
+      if (direction === 0) {
+        setAnimation(`${animationName} ${animationName}Left`);
+      } else if (direction === 1) {
+        setAnimation(`${animationName} ${animationName}Right`);
+      } else if (direction === 2) {
+        setAnimation(`${animationName} ${animationName}Back`);
+      } else if (direction === 3) {
+        setAnimation(`${animationName} ${animationName}Front`);
+      }
+    };
+    window.addEventListener("click", handleClick);
+    return () => {
+      window.removeEventListener("click", handleClick);
+    };
+  }, [direction]);
 };

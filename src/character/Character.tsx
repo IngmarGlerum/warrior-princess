@@ -8,8 +8,6 @@ import { useAnimationEnd } from "../hooks/useAnimationEnd";
 const Character = () => {
   const [animation, setAnimation] = useState("spellcast spellcastLeft");
 
-  // TODO statevariables into 1 object
-
   const animationName = "walk";
   // const animationName2 = 'spellcast'
   const characterSpeed = 6;
@@ -18,12 +16,11 @@ const Character = () => {
   const movementRef = useRef<Position>({ top: 0, left: 0 });
   const weapon = "recurveBow";
   const isMoveKeyPressedRef = useRef<boolean>(false); // Track key state with ref
-  const isAnimationDone = useRef<boolean>(false);
   const { characterDivRef, isAnimationEnded, setIsAnimationEnded } =
-    useAnimationEnd(isAnimationDone);
+    useAnimationEnd();
 
   const movement = {
-    isAnimationDone,
+    setIsAnimationEnded,
     isMoveKeyPressedRef,
     setAnimation,
     animationName,
@@ -34,11 +31,9 @@ const Character = () => {
   };
 
   useMoveCharachter(movement);
-  // console.log(direction);
   console.log("rerender");
 
   useRanged(setAnimation, "shoot", direction);
-  console.log(isAnimationEnded);
   // console.log('character.tsx rerender');
 
   const idleArray = [
@@ -48,17 +43,15 @@ const Character = () => {
     "bowIdleFront",
   ];
 
-  console.log(isMoveKeyPressedRef.current);
-
   return (
     <>
       <div className="title">
         `container ${weapon} $
-        {isAnimationDone.current && !isMoveKeyPressedRef.current
+        {isAnimationEnded && !isMoveKeyPressedRef.current
           ? idleArray[direction]
           : animation}
         ` direction: {direction} {isMoveKeyPressedRef.current} animation ended:{" "}
-        {JSON.stringify(isAnimationDone.current)}
+        {JSON.stringify(isAnimationEnded)}
       </div>
       <button onClick={() => setAnimation("spellcast spellcastLeft")}>
         Left
